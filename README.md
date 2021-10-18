@@ -9,7 +9,7 @@ In order to run this utility, please install Oracle JDK1.8 or higher on your com
 Then, run this utility like this:
 
 ```
-java -jar dbConnect-1.0.0.jar /t mssql /f path_to_sql_file
+java -jar dbConnect-1.0.0.jar /t mssql /h localhost /P port /u username /p password /db database  
 ```
 
 ## Install
