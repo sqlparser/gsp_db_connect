@@ -2,16 +2,6 @@
 gsp tool connect to database to extract metadata
 
 
-## Binary version
-https://www.gudusoft.com/dl/dbConnect-1.0.0.jar
-
-In order to run this utility, please install Oracle JDK1.8 or higher on your computer correctly.
-Then, run this utility like this:
-
-```
-java -jar dbConnect-1.0.0.jar /t mssql /h localhost /P port /u username /p password /db database  
-```
-
 ## Install
 ```
 mvn install 
@@ -155,3 +145,12 @@ Connect using the specified JDBC URL.
 java -jar dbConnect-1.0.0.jar /t hive /jdbc jdbc:hive2://localhost:10000/default /u root /p password  
 ```
 
+## Binary version
+https://www.gudusoft.com/dl/dbConnect-1.0.0.jar
+
+In order to run this utility, please install Oracle JDK1.8 or higher on your computer correctly.
+Then, run this utility like this:
+
+```
+java -jar dbConnect-1.0.0.jar /t mssql /h localhost /P port /u username /p password /db database  
+```
