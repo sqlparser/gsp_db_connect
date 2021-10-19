@@ -9,6 +9,21 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
+//        args = new String[]{
+//                "/t"
+//                , "hive"
+//                ,"/u"
+//                , "root"
+//                ,"/p"
+//                , "123456a?"
+//                ,"/h"
+//                , "115.159.225.38"
+//                ,"/P"
+//                , "10000"
+//                ,"/db"
+//                , "default"
+//        };
+
         List<String> cmds = Arrays.asList(args);
         validArgs(cmds);
 
@@ -90,7 +105,9 @@ public class Main {
     private static void print() {
         System.out.println(
                 "/t: Required, set the database type. " +
-                        "Support azure,db2,greenplum,hive,mssql,sqlserver,mysql,netezza,oracle,postgresql,postgres,redshift,snowflake,teradata, " +
+                        "Support access,bigquery,couchbase,dax,db2,greenplum,hana,hive,impala,informix,mdx,mssql,\n" +
+                        "sqlserver,mysql,netezza,odbc,openedge,oracle,postgresql,postgres,redshift,snowflake,\n" +
+                        "sybase,teradata,soql,vertica\n, " +
                         "the default value is oracle");
         System.out.println("/h: Optional, specify the host of jdbc connection");
         System.out.println("/P: Optional, specify the port of jdbc connection, note it's capital P.");
