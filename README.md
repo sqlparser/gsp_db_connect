@@ -1,11 +1,33 @@
 # gsp_db_connect
 gsp tool connect to database to extract metadata
 
+## Local debugging
+Execute the script first compile, then run.
 
-## Install
+1, compile
+- mac & linux
 ```
-mvn install 
+./compile.sh
 ```
+- windwos
+```
+compile.bat
+```
+
+2, run
+- mac & linux
+```
+./run.sh /t <database type>  [/h <host> /P <port>] [/jdbc <jdbcurl>] /u <username> /p <password> /db <database>
+```
+- windwos
+```
+run.bat /t <database type>  [/h <host> /P <port>] [/jdbc <jdbcurl>] /u <username> /p <password> /db <database>
+```
+
+## Binary version
+https://www.gudusoft.com/dl/dbConnect-1.0.0.jar
+
+> In order to run this utility, please install Oracle JDK1.8 or higher on your computer correctly.
 
 ## Usage
 ```
@@ -145,12 +167,3 @@ Connect using the specified JDBC URL.
 java -jar dbConnect-1.0.0.jar /t hive /jdbc jdbc:hive2://localhost:10000/default /u root /p password  
 ```
 
-## Binary version
-https://www.gudusoft.com/dl/dbConnect-1.0.0.jar
-
-In order to run this utility, please install Oracle JDK1.8 or higher on your computer correctly.
-Then, run this utility like this:
-
-```
-java -jar dbConnect-1.0.0.jar /t dbtype /h hostname /P port /u username /p password /db database  
-```
