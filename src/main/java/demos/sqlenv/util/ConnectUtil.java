@@ -14,7 +14,8 @@ public class ConnectUtil {
 			@Override
 			public Connection call() throws Exception {
 				  Class.forName(driver);
-		          return DriverManager.getConnection(url, name, password);
+		          return (StringUtils.isEmpty(name) || StringUtils.isEmpty(password)) ? DriverManager.getConnection(url) :
+                        DriverManager.getConnection(url, name, password);
 			}
 		});
     	new Thread(future).start();
