@@ -9,20 +9,6 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-//        args = new String[]{
-//                "/t"
-//                , "hive"
-//                ,"/u"
-//                , "root"
-//                ,"/p"
-//                , "123456a?"
-//                ,"/h"
-//                , "115.159.225.38"
-//                ,"/P"
-//                , "10000"
-//                ,"/db"
-//                , "default"
-//        };
 
         List<String> cmds = Arrays.asList(args);
         validArgs(cmds);
@@ -94,8 +80,6 @@ public class Main {
 
     private static void validArgs(List<String> cmds) {
         if (!cmds.contains("/t")
-                || !cmds.contains("/u")
-                || !cmds.contains("/p")
                 || (!cmds.contains("/jdbc") && !cmds.contains("/h") && !cmds.contains("/P"))) {
             print();
             System.exit(1);
