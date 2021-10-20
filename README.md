@@ -35,8 +35,8 @@ Usage: java -jar dbConnect-1.0.0.jar /t <database type>  [/h <host> /P <port>] [
 /t: Required, set the database type.
 /h: Optional, specify the host of jdbc connection
 /P: Optional, specify the port of jdbc connection, note it's capital P.
-/u: Required, specify the username of jdbc connection.
-/p: Required, specify the password of jdbc connection, note it's lowercase P.
+/u: Optional, specify the username of jdbc connection.
+/p: Optional, specify the password of jdbc connection, note it's lowercase P.
 /db: Optional, specify the database of jdbc connection.
 /jdbc: Optional, specify the jdbc url of connection.
 ```
