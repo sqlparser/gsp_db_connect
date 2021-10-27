@@ -150,7 +150,7 @@ java -jar dbConnect-1.0.0.jar /t teradata /h localhost /P 1025 /u root /p passwo
 Connect using the specified JDBC URL.
 
 ```sh
-java -jar dbConnect-1.0.0.jar /t teradata /jdbc jdbc:teradata://127.0.0.1:1025/DEMO_DB  /u root /p password   
+java -jar dbConnect-1.0.0.jar /t teradata /jdbc jdbc:teradata://127.0.0.1/DBS_PORT=1025  /u root /p password   
 ```
 
 ### 1.9 connect to Hive
