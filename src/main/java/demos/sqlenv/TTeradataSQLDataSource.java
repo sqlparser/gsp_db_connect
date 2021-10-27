@@ -1,7 +1,6 @@
 package demos.sqlenv;
 
 import gudusoft.gsqlparser.EDbVendor;
-import gudusoft.gsqlparser.sqlenv.DatabaseSQLDataSource;
 
 public class TTeradataSQLDataSource extends DatabaseSQLDataSource {
 
