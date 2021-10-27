@@ -406,6 +406,24 @@ public class JdbcUrlParser {
 				return snowflakeSQLDataSource;
 			}
 		}
+		case dbvteradata: {
+			if (trimJdbcUrl.startsWith("jdbc:teradata://")) {
+			    String host = jdbcUrl.substring("jdbc:teradata://".length());
+			    if (host.indexOf("/") != -1) {
+				host = host.substring(0, host.indexOf("/"));
+			    }
+			    String database = null;
+			    if (trimJdbcUrl.toUpperCase().contains("DATABASE=")) {
+				database = jdbcUrl.split("DATABASE=")[1].split(",")[0];
+			    }
+
+			    String port = "1433";
+			    if (trimJdbcUrl.toUpperCase().contains("DBS_PORT=")) {
+				port = jdbcUrl.split("DBS_PORT=")[1].split(",")[0];
+			    }
+			    return new TTeradataSQLDataSource(host, port, account, password, database);
+			}
+           	 }
 		default:
 			throw new UnsupportedOperationException(
 					"Unsupport the " + vendor.name().replace("dbv", "") + " jdbc url: " + jdbcUrl);
@@ -451,6 +469,9 @@ public class JdbcUrlParser {
 		if (trimJdbcUrl.indexOf("hive") != -1) {
 			return generateSQLDataSource(EDbVendor.dbvhive, jdbcUrl, account, password);
 		}
+		if (trimJdbcUrl.indexOf("teradata") != -1) {
+            		return generateSQLDataSource(EDbVendor.dbvteradata, jdbcUrl, account, password);
+        	}
 		throw new UnsupportedOperationException("Unsupport the jdbc url: " + jdbcUrl);
 	}
 }
