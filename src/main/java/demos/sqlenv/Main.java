@@ -9,6 +9,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
+        System.out.println("version: 1.1.0   date: 2021-11-11.");
 
         List<String> cmds = Arrays.asList(args);
         validArgs(cmds);
@@ -18,11 +19,23 @@ public class Main {
         String username = cmds.get(cmds.indexOf("/u") + 1);
         String password = cmds.get(cmds.indexOf("/p") + 1);
         String database = cmds.get(cmds.indexOf("/db") + 1);
-
+        Class<?> driver = null;
         TSQLDataSource connect;
+        if (cmds.contains("/driver")) {
+            String driverStr = cmds.get(cmds.indexOf("/driver") + 1);
+            try {
+                driver = Class.forName(driverStr);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
         if (cmds.contains("/jdbc")) {
             jdbc = cmds.get(cmds.indexOf("/jdbc") + 1);
-            connect = toConnect(vendor, jdbc, username, password, database);
+            if (null != driver) {
+                connect = toConnect(vendor, driver, jdbc, username, password);
+            } else {
+                connect = toConnect(vendor, jdbc, username, password, database);
+            }
         } else {
             host = cmds.get(cmds.indexOf("/h") + 1);
             port = cmds.get(cmds.indexOf("/P") + 1);
@@ -35,7 +48,7 @@ public class Main {
         System.out.println(metadata);
     }
 
-    public static TSQLDataSource toConnect(EDbVendor vendor, String jdbc, String username, String password, String database) {
+    private static TSQLDataSource toConnect(EDbVendor vendor, String jdbc, String username, String password, String database) {
         TSQLDataSource datasource = TSQLDataSource.createSQLDataSource(vendor, jdbc, username, password);
         if (vendor == EDbVendor.dbvmysql) {
             datasource = TMysqlSQLDataSource.createSQLDataSource(jdbc, username, password);
@@ -57,7 +70,7 @@ public class Main {
         return datasource;
     }
 
-    public static TSQLDataSource toConnect(EDbVendor vendor, String username, String password, String host, String port, String database) {
+    private static TSQLDataSource toConnect(EDbVendor vendor, String username, String password, String host, String port, String database) {
         TSQLDataSource datasource = new TSQLDataSource(vendor, host, port, username, password);
         if (vendor == EDbVendor.dbvmysql) {
             datasource = new TMysqlSQLDataSource(host, port, username, password);
@@ -76,6 +89,55 @@ public class Main {
             System.exit(1);
         }
         return datasource;
+    }
+
+    private static TSQLDataSource toConnect(EDbVendor vendor, Class<?> driver, String jdbc, String account, String password) {
+        try {
+            if (vendor == EDbVendor.dbvoracle) {
+                return TSQLDataSource.<TOracleSQLDataSource>createSQLDataSource(vendor, driver, jdbc, account,
+                        password);
+            }
+            if (vendor == EDbVendor.dbvmssql) {
+                return TSQLDataSource.<TMssqlSQLDataSource>createSQLDataSource(vendor, driver, jdbc, account,
+                        password);
+            }
+            if (vendor == EDbVendor.dbvpostgresql) {
+                return TSQLDataSource.<TPostgreSQLDataSource>createSQLDataSource(vendor, driver, jdbc, account,
+                        password);
+            }
+            if (vendor == EDbVendor.dbvgreenplum) {
+                return TSQLDataSource.<TGreenplumSQLDataSource>createSQLDataSource(vendor, driver, jdbc, account,
+                        password);
+            }
+            if (vendor == EDbVendor.dbvredshift) {
+                return TSQLDataSource.<TRedshiftSQLDataSource>createSQLDataSource(vendor, driver, jdbc, account,
+                        password);
+            }
+            if (vendor == EDbVendor.dbvmysql) {
+                return TSQLDataSource.<TMysqlSQLDataSource>createSQLDataSource(vendor, driver, jdbc, account,
+                        password);
+            }
+            if (vendor == EDbVendor.dbvnetezza) {
+                return TSQLDataSource.<TNetezzaSQLDataSource>createSQLDataSource(vendor, driver, jdbc, account,
+                        password);
+            }
+            if (vendor == EDbVendor.dbvsnowflake) {
+                return TSQLDataSource.<TSnowflakeSQLDataSource>createSQLDataSource(vendor, driver, jdbc, account,
+                        password);
+            }
+            if (vendor == EDbVendor.dbvteradata) {
+                return TSQLDataSource.<TTeradataSQLDataSource>createSQLDataSource(vendor, driver, jdbc, account,
+                        password);
+            }
+            if (vendor == EDbVendor.dbvhive) {
+                return TSQLDataSource.<THiveMetadataDataSource>createSQLDataSource(vendor, driver, jdbc, account,
+                        password);
+            }
+        } catch (Exception e) {
+            System.err.println("Connect datasource failed. " + e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private static void validArgs(List<String> cmds) {

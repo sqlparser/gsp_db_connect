@@ -1,7 +1,6 @@
 package demos.sqlenv;
 
 import gudusoft.gsqlparser.EDbVendor;
-import demos.sqlenv.DbSchemaSQLDataSource;
 
 public class TSnowflakeSQLDataSource extends DbSchemaSQLDataSource {
 	
@@ -10,6 +9,11 @@ public class TSnowflakeSQLDataSource extends DbSchemaSQLDataSource {
 	private String privateKeyFile;
 	
 	private String privateKeyFilePwd;
+
+	public TSnowflakeSQLDataSource(Class<?> driver, String jdbcUrl, String account, String password) {
+		super(EDbVendor.dbvsnowflake, driver, jdbcUrl, account, password);
+		setSystemDbsSchemas("*/INFORMATION_SCHEMA");
+	}
 
 	public TSnowflakeSQLDataSource(String hostName, String port, String account, String password, String database) {
 		super(EDbVendor.dbvsnowflake, hostName, port, account, password, database);

@@ -1,6 +1,5 @@
 package demos.sqlenv;
 
-import gudusoft.gsqlparser.EDbVendor;
 import demos.sqlenv.connect.ConnectionFactory;
 import demos.sqlenv.constant.DbOperation;
 import demos.sqlenv.constant.DbTypeConstant;
@@ -8,8 +7,9 @@ import demos.sqlenv.metadata.DDL;
 import demos.sqlenv.operation.DbOperationFactory;
 import demos.sqlenv.operation.DbOperationService;
 import demos.sqlenv.parser.TJSONSQLEnvParser;
-import gudusoft.gsqlparser.sqlenv.TSQLEnv;
 import demos.sqlenv.util.JdbcUrlParser;
+import gudusoft.gsqlparser.EDbVendor;
+import gudusoft.gsqlparser.sqlenv.TSQLEnv;
 import gudusoft.gsqlparser.util.SQLUtil;
 
 import java.sql.Connection;
@@ -23,6 +23,8 @@ public class TSQLDataSource {
 
     public static final Logger logger = Logger.getLogger(TSQLDataSource.class.getName());
 
+    private final Class<?> driver;
+    private final String jdbcUrl;
     private final String account;
     private final String password;
     private final String port;
@@ -52,6 +54,19 @@ public class TSQLDataSource {
         });
     }
 
+    public TSQLDataSource(EDbVendor vendor, Class<?> driver, String jdbcUrl, String account, String password) {
+        this.vendor = vendor;
+        this.driver = driver;
+        this.jdbcUrl = jdbcUrl;
+        this.dbCategory = DbTypeConstant.vendorTypes.get(vendor);
+        this.dbType = this.dbCategory;
+        this.account = account;
+        this.password = password;
+        this.port = null;
+        this.database = null;
+        this.hostName = null;
+    }
+
     public TSQLDataSource(EDbVendor vendor, String hostName, String port, String account, String password) {
         this(vendor, hostName, port, account, password, null);
     }
@@ -65,6 +80,8 @@ public class TSQLDataSource {
         this.hostName = hostName;
         this.dbCategory = DbTypeConstant.vendorTypes.get(vendor);
         this.dbType = this.dbCategory;
+        this.driver = null;
+        this.jdbcUrl = null;
     }
 
     public String getAccount() {
@@ -103,9 +120,17 @@ public class TSQLDataSource {
         this.timeout = timeout;
     }
 
+    public Class<?> getDriver() {
+        return driver;
+    }
+
+    public String getJdbcUrl() {
+        return jdbcUrl;
+    }
+
     public Connection getConnection() {
         try {
-            if (connection != null && (connection.isClosed() || !connection.isValid(0))) {
+            if (connection != null && connection.isClosed()) {
                 connection = null;
             }
             if (connection == null) {
@@ -199,29 +224,19 @@ public class TSQLDataSource {
         }
     }
 
+    public static <T extends TSQLDataSource> T createSQLDataSource(EDbVendor vendor, Class<?> driver, String jdbcUrl,
+                                                                   String account, String password) {
+        return (T) JdbcUrlParser.generateSQLDataSource(vendor, driver, jdbcUrl, account, password);
+    }
+
     public static TSQLDataSource createSQLDataSource(String jdbcUrl, String account, String password) {
-        if (jdbcUrl == null) {
-            return null;
-        }
         return JdbcUrlParser.generateSQLDataSource(jdbcUrl, account, password);
     }
 
     @SuppressWarnings("unchecked")
     public static <T extends TSQLDataSource> T createSQLDataSource(EDbVendor vendor, String jdbcUrl, String account,
-                                                                                              String password) {
-        if (jdbcUrl == null) {
-            return null;
-        }
-        return (T) JdbcUrlParser.generateSQLDataSource(vendor, jdbcUrl, account, password);
-    }
-
-    public static void main(String[] args) {
-        TMssqlSQLDataSource datasource = TSQLDataSource.createSQLDataSource(EDbVendor.dbvmssql,
-                "jdbc:sqlserver://aaa:123;DatabaseName=dbf", "account", "password");
-        System.out.println(datasource);
-
-        gudusoft.gsqlparser.sqlenv.TSQLDataSource datasource1 = gudusoft.gsqlparser.sqlenv.TSQLDataSource.createSQLDataSource("jdbc:sqlserver://aaa:123;DatabaseName=dbf",
-                "account", "password");
-        System.out.println(datasource1);
+                                                                   String password) {
+        return (T)JdbcUrlParser.generateSQLDataSource(vendor, jdbcUrl, account, password);
     }
 }
+

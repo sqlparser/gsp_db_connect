@@ -14,6 +14,10 @@ public abstract class DatabaseSQLDataSource extends TSQLDataSource {
 
 	private List<String> systemDatabases = new ArrayList<String>();
 
+	public DatabaseSQLDataSource(EDbVendor vendor, Class<?> driver, String jdbcUrl, String account, String password) {
+		super(vendor, driver, jdbcUrl, account, password);
+	}
+
 	public DatabaseSQLDataSource(EDbVendor vendor, String hostName, String port, String account, String password) {
 		super(vendor, hostName, port, account, password);
 	}

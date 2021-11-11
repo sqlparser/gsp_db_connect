@@ -14,6 +14,10 @@ public abstract class DbSchemaSQLDataSource extends TSQLDataSource {
 
 	private List<String> systemDbsSchemas = new ArrayList<String>();
 
+	public DbSchemaSQLDataSource(EDbVendor vendor, Class<?> driver, String jdbcUrl, String account, String password) {
+		super(vendor, driver, jdbcUrl, account, password);
+	}
+
 	public DbSchemaSQLDataSource(EDbVendor vendor, String hostName, String port, String account, String password) {
 		super(vendor, hostName, port, account, password);
 	}

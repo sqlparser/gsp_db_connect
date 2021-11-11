@@ -1,13 +1,19 @@
 package demos.sqlenv;
 
-import gudusoft.gsqlparser.EDbVendor;
 import demos.sqlenv.connect.ConnectionFactory;
 import demos.sqlenv.constant.DbConstant;
+import gudusoft.gsqlparser.EDbVendor;
 
 import java.sql.Connection;
 import java.util.logging.Level;
 
 public class TMysqlSQLDataSource extends DbSchemaSQLDataSource {
+
+	public TMysqlSQLDataSource(Class<?> driver, String jdbcUrl, String account, String password) {
+		super(EDbVendor.dbvmysql, driver, jdbcUrl, account, password);
+		setSystemDbsSchemas("mysql", "information_schema", "performance_schema", "sys", "*/information_schema");
+		this.dbType = DbConstant.MySQLV5;
+	}
 
 	public TMysqlSQLDataSource(String hostName, String port, String account, String password, String database) {
 		super(EDbVendor.dbvmysql, hostName, port, account, password, database);

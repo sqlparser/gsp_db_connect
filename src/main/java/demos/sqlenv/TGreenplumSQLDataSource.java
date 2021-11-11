@@ -4,6 +4,11 @@ import gudusoft.gsqlparser.EDbVendor;
 
 public class TGreenplumSQLDataSource extends DbSchemaSQLDataSource {
 
+	public TGreenplumSQLDataSource(Class<?> driver, String jdbcUrl, String account, String password) {
+		super(EDbVendor.dbvgreenplum, driver, jdbcUrl, account, password);
+		setSystemDbsSchemas("*/information_schema", "*/pg_catalog");
+	}
+
 	public TGreenplumSQLDataSource(String hostName, String port, String account, String password) {
 		super(EDbVendor.dbvgreenplum, hostName, port, account, password, "postgres");
 		setSystemDbsSchemas("*/information_schema", "*/pg_catalog");

@@ -14,6 +14,10 @@ public abstract class SchemaSQLDataSource extends TSQLDataSource {
 
 	private List<String> systemSchemas = new ArrayList<String>();
 
+	public SchemaSQLDataSource(EDbVendor vendor, Class<?> driver, String jdbcUrl, String account, String password) {
+		super(vendor, driver, jdbcUrl, account, password);
+	}
+
 	public SchemaSQLDataSource(EDbVendor vendor, String hostName, String port, String account, String password) {
 		super(vendor, hostName, port, account, password);
 	}

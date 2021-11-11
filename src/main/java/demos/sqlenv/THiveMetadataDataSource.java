@@ -8,6 +8,10 @@ import java.util.logging.Level;
 
 public class THiveMetadataDataSource extends DatabaseSQLDataSource {
 
+	public THiveMetadataDataSource(Class<?> driver, String jdbcUrl, String account, String password) {
+		super(EDbVendor.dbvhive, driver, jdbcUrl, account, password);
+	}
+
 	public THiveMetadataDataSource(String hostName, String port, String account, String password) {
 		super(EDbVendor.dbvhive, hostName, port, account, password, "default");
 	}
