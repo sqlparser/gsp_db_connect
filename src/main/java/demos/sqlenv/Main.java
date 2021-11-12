@@ -18,7 +18,12 @@ public class Main {
         String jdbc, host, port;
         String username = cmds.get(cmds.indexOf("/u") + 1);
         String password = cmds.get(cmds.indexOf("/p") + 1);
-        String database = cmds.get(cmds.indexOf("/db") + 1);
+        String database = null;
+        for (int i = 0; i < cmds.size(); i++) {
+            if ("/db".equalsIgnoreCase(cmds.get(i))) {
+                database = cmds.get(cmds.indexOf("/db") + 1);
+            }
+        }
         Class<?> driver = null;
         TSQLDataSource connect;
         if (cmds.contains("/driver")) {
