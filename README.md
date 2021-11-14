@@ -212,6 +212,8 @@ Connect using the specified JDBC URL and you can use other driver.First, you nee
 ./start.sh /t teradata /driver com.teradata.jdbc.TeraDriver  /jdbc jdbc:teradata://127.0.0.1/DBS_PORT=1025  /u root /p password   
 ```
 
+*If you want to use version 17, delete the Teradata driver package from the lib directory and move the teradata driver package to lib.*
+
 ### 1.9 connect to Hive
 Connect to Hive server and fetch the metadata to help resolve the ambiguous columns in SQL query.
 Tables are under `default` database.
