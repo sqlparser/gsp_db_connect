@@ -192,10 +192,10 @@ Connect using the specified JDBC URL and you can use other driver.First, you nee
 ```
 
 ### 1.8 connect to Teradata
-Tables are under `DEMO_DB` database.
+Tables are under `DBC` database.
 
 ```sh
-./start.sh /t teradata /h localhost /P 1025 /u root /p password /db DEMO_DB  
+./start.sh /t teradata /h localhost /P 1025 /u root /p password /db DBC  
 ```
 
 Connect using the specified JDBC URL.
@@ -203,16 +203,16 @@ Connect using the specified JDBC URL.
 > Note that on Windows, this approach does not work.
 
 ```sh
-./start.sh /t teradata /jdbc jdbc:teradata://127.0.0.1/DBS_PORT=1025  /u root /p password   
+./start.sh /t teradata /jdbc jdbc:teradata://127.0.0.1/DBS_PORT=1025  /u root /p password /db DBC
 ```
 
 Connect using the specified JDBC URL and you can use other driver.First, you need to place the driver package in the lib directory.
 
 ```sh
-./start.sh /t teradata /driver com.teradata.jdbc.TeraDriver  /jdbc jdbc:teradata://127.0.0.1/DBS_PORT=1025  /u root /p password   
+./start.sh /t teradata /driver com.teradata.jdbc.TeraDriver  /jdbc jdbc:teradata://127.0.0.1/DBS_PORT=1025  /u root /p password  /db DBC
 ```
 
-*If you want to use version 17, delete the Teradata driver package from the lib directory and move the teradata driver package to lib.*
+*If you want to use version 17, delete the Teradata driver package from the lib directory and move the teradata driver package to the lib directory with the database set to DBC.*
 
 ### 1.9 connect to Hive
 Connect to Hive server and fetch the metadata to help resolve the ambiguous columns in SQL query.
