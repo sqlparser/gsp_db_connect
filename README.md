@@ -60,9 +60,12 @@ Tables are under this database: `AdventureWorksDW2019`.
 
 Connect using the specified JDBC URL.
 
+> Note that on Windows, this approach does not work.
+
 ```sh
 ./start.sh /t mssql /jdbc jdbc:sqlserver://127.0.0.1:1433;DatabaseName=AdventureWorksDW2019  /u root /p password 
 ```
+
 
 Connect using the specified JDBC URL and you can use other driver.First, you need to place the driver package in the lib directory.
 
@@ -155,6 +158,8 @@ Tables are under `postgres` database.
 
 Connect using the specified JDBC URL.
 
+> Note that on Windows, this approach does not work.
+
 ```sh
 ./start.sh /t greenplum /jdbc jdbc:pivotal:greenplum://127.0.0.1:2345;DatabaseName=postgres  /u root /p password   
 ```
@@ -174,6 +179,8 @@ Tables are under `DEMO_DB` database.
 
 Connect using the specified JDBC URL.
 
+> Note that on Windows, this approach does not work.
+
 ```sh
 ./start.sh /t snowflake /jdbc jdbc:snowflake://127.0.0.1:443?db=DEMO_DB  /u root /p password   
 ```
@@ -192,6 +199,8 @@ Tables are under `DEMO_DB` database.
 ```
 
 Connect using the specified JDBC URL.
+
+> Note that on Windows, this approach does not work.
 
 ```sh
 ./start.sh /t teradata /jdbc jdbc:teradata://127.0.0.1/DBS_PORT=1025  /u root /p password   
