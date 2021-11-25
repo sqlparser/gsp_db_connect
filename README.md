@@ -25,7 +25,7 @@ run.bat /t <database type>  [/h <host> /P <port>] [/jdbc <jdbcurl>] /u <username
 ```
 
 ## Binary version
-https://www.gudusoft.com/dl/dbConnect-1.1.0.zip
+https://www.gudusoft.com/dl/dbConnect-1.2.0.zip
 
 > In order to run this utility, please install Oracle JDK1.8 or higher on your computer correctly.
 
