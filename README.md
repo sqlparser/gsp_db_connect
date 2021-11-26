@@ -28,6 +28,7 @@ run.bat /t <database type>  [/h <host> /P <port>] [/jdbc <jdbcurl>] /u <username
 https://www.gudusoft.com/dl/dbConnect-1.2.0.zip
 
 > update date: 2021/11/26
+
 > In order to run this utility, please install Oracle JDK1.8 or higher on your computer correctly.
 
 ## Usage
@@ -50,7 +51,7 @@ Here is the list of available database after /t option:
 azure,db2,greenplum,hive,mssql,sqlserver,mysql,netezza,oracle,postgresql,postgres,redshift,snowflake,teradata
 ```
 
-> 
+
 
 ### 1.1 connect to SQL Server
 Tables are under this database: `AdventureWorksDW2019`.
